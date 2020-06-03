@@ -1,20 +1,12 @@
-import express from 'express';
+import express, { request } from 'express';
+import routes from './routes';
+import path from 'path';
 
 const app = express();
 
-app.get('/users', (request, response) => {
-  console.log('Listagem de Usuários');
+app.use(express.json());
+app.use(routes);
 
-  //response.send('Hello World!!');
-  response.json([
-    'Raphael',
-    'Letícia',
-    'Júlia',
-    'Betânia',
-    'Mauricio',
-    'Manoel',
-    'Ana Maria',
-  ]);
-});
+app.use('/uploads', express.static(path.resolve(__dirname, '..', 'uploads')));
 
 app.listen(3333);
