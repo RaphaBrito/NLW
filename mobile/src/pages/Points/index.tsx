@@ -24,7 +24,7 @@ const Points = () => {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
         <TouchableOpacity onPress={handleNavigateBack}>
           <Icon name='arrow-left' color='#34cb79' size={20} />
