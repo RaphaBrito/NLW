@@ -22,6 +22,7 @@ interface Item {
 
 const Points = () => {
   const [items, setItems] = useState<Item[]>([]);
+  const [selectedItems, setSelectedItems] = useState<number[]>([]);
 
   const navigation = useNavigation();
   useEffect(() => {
@@ -39,6 +40,15 @@ const Points = () => {
     navigation.navigate('Detail');
   }
 
+  function handleSelectItem(id: number) {
+    const alredySelected = selectedItems.findIndex((item) => item === id);
+    if (alredySelected >= 0) {
+      const filteredItems = selectedItems.filter((item) => item !== id);
+      setSelectedItems(filteredItems);
+    } else {
+      setSelectedItems([...selectedItems, id]);
+    }
+  }
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <View style={styles.container}>
@@ -89,8 +99,11 @@ const Points = () => {
           {items.map((item) => (
             <TouchableOpacity
               key={item.id}
-              style={styles.item}
-              onPress={() => {}}
+              style={[
+                styles.item,
+                selectedItems.includes(item.id) ? styles.selectedItem : {},
+              ]}
+              onPress={() => handleSelectItem(item.id)}
               activeOpacity={0.6}
             >
               <SvgUri width={42} height={42} uri={item.image_url}></SvgUri>
