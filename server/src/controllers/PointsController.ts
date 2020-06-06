@@ -44,7 +44,7 @@ class PointsController {
       image_url: `http://192.168.0.102:3333/uploads/${point.image}`,
     };
 
-    return response.json({ serializedPoint, items });
+    return response.json({ point: serializedPoint, items });
   }
 
   async create(request: Request, response: Response) {
